@@ -1,0 +1,51 @@
+13/01/2019
+- registrasi-stagingid : panelheigh:auto
+
+Pass123@
+
+25-01-2020
+- auth- get user grup 
+- membuat menu validasi
+29-01-2020
+- login tambah session nama unit
+- menampilkan nama unit yang login pada bagian footer
+- nama session nama saja / firstname
+
+30-01-2020
+- registrasi 
+  yang login pusat bisa lihat semua data tapi tidak bisa edit,delete dan update luaran
+- registrasi dan validasi
+  menambahkan nama unit pada data registrasi dan validasi
+- registrasi
+  ubah metode pengambilan nomor urut terakhir
+- registry 
+  ubah data terbaru tampil paling atas
+- registrasi
+  menambah kolom filter pencarian
+
+31-01-2020
+- staging label for radio button
+
+02-02-2020
+-	merubah metode pencarian data tumor
+
+04-02-2020
+- merubah tombol hapus tombol pada data riwayat dan diagnosis
+- menghapus isian usia saat terdiagnosis menjadi otomatis menghitung sendiri
+  antara tanggal lahir denngan tanggal terkhir kolom diagnosis
+
+05-02-2020
+- akses tombol hapus hanya untuk admin dan superadmin
+- akses validasi data hanya untuk validator setempat
+  pusat bisa melihat data tapi tidak bisa melakukan validasi
+  admin bisa melihat tapi tidak bisa melakukan validasi
+
+07-02-2020
+- subgrup,morfologi,topografi : merge subgrup
+- membetulkan sorting menu
+- query search subgrup,morfologi,topografi bisa cari by subgrup
+- propinsi,kota/kab,kecamatan, desa saat edit langsung terpilih nama daerah nya
+
+08-02-2020
+- update propinsi, kabupaten, kecamatan, desa pada menu validasi 
+- upate hitung yang sudah di validasi dan yang belum pada menu validasi
