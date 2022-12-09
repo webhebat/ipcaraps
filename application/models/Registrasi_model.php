@@ -27,11 +27,11 @@ class Registrasi_model extends CI_Model
         return $kd;
     }
 
-    public function get_registrasi($offset, $limit, $search, $validasi, $unit, $tgl, $tgl2, $luaran, $status, $subgrupid,$tgldiagnosis,$tgldiagnosis2)
+    public function get_registrasi($offset, $limit, $search, $validasi, $unit, $tgl, $tgl2, $luaran, $status, $subgrupid, $tgldiagnosis, $tgldiagnosis2)
     {
 
         $where = '';
-        $wheretgldiagnosis ='';
+        $wheretgldiagnosis = '';
         $whereadm1 =  '';
 
         $unitid = $this->session->userdata('unitid');
@@ -102,7 +102,7 @@ class Registrasi_model extends CI_Model
             LEFT JOIN luaran L ON R.id = L.registrasiid
             WHERE 1 AND R.deleted = 'n' $where $whereadm1 GROUP BY R.id ORDER BY R.id DESC ";
 
-            echo $sql2 = "SELECT R.*,CONCAT(R.tempat_lahir, ', ', R.tgl_lahir) AS ttl, CASE WHEN R.jenis_kelamin = 'l' THEN 'Laki-laki' WHEN R.jenis_kelamin = 'p' THEN 'Perempuan' END AS jkelamin,S.kodesubgrup,S.subgrup,S.stagingid as idstaging,M.kodemorfologi,M.morfologi,T.kodetopografi,T.topografi,P.nama as propinsi,K.nama as kabupaten,KEC.nama as kecamatan,DES.nama as desa,U.nama_unit,L.registrasiid, CASE WHEN R.literalitas = 'l1' THEN 'Unilateral -kanan' WHEN R.literalitas = 'l2' THEN 'Unilateral -kiri' WHEN R.literalitas = 'l3' THEN 'Bilateral' END AS ketliteralitas,D.tgldiagnosis FROM registrasi R
+        $sql2 = "SELECT R.*,CONCAT(R.tempat_lahir, ', ', R.tgl_lahir) AS ttl, CASE WHEN R.jenis_kelamin = 'l' THEN 'Laki-laki' WHEN R.jenis_kelamin = 'p' THEN 'Perempuan' END AS jkelamin,S.kodesubgrup,S.subgrup,S.stagingid as idstaging,M.kodemorfologi,M.morfologi,T.kodetopografi,T.topografi,P.nama as propinsi,K.nama as kabupaten,KEC.nama as kecamatan,DES.nama as desa,U.nama_unit,L.registrasiid, CASE WHEN R.literalitas = 'l1' THEN 'Unilateral -kanan' WHEN R.literalitas = 'l2' THEN 'Unilateral -kiri' WHEN R.literalitas = 'l3' THEN 'Bilateral' END AS ketliteralitas,D.tgldiagnosis FROM registrasi R
             LEFT JOIN subgrup S on S.id = R.subgrupid 
             LEFT JOIN morfologi M on M.id = R.morfologiid 
             LEFT JOIN topografi T on T.id = R.topografiid
@@ -127,7 +127,7 @@ class Registrasi_model extends CI_Model
         return $result;
     }
 
-   // SELECT R.id, R.nama as nama, MAX(D.tgl_diagnosis) as tgldianosis FROM registrasi R LEFT JOIN registrasi_diagnosis D ON R.id = D.registrasiid WHERE D.registrasiid = '31' AND D.tgl_diagnosis BETWEEN '2020-01-01' AND '2021-12-01' GROUP BY R.id;
+    // SELECT R.id, R.nama as nama, MAX(D.tgl_diagnosis) as tgldianosis FROM registrasi R LEFT JOIN registrasi_diagnosis D ON R.id = D.registrasiid WHERE D.registrasiid = '31' AND D.tgl_diagnosis BETWEEN '2020-01-01' AND '2021-12-01' GROUP BY R.id;
 
     function gettgldiagnosis($id)
     {
