@@ -164,7 +164,7 @@ $( document ).ready(function(){
             $(this).datagrid("autoMergeCells", ['noregistrasi', 'nama']);
         }    
     });
-
+    
     $('#key_subgrupid').combobox({
         panelWidth:200,
         panelHeight:'300',
@@ -188,6 +188,31 @@ $( document ).ready(function(){
             }
         }
     });
+
+    $('#key_unitid').combobox({
+		panelWidth: 200,
+		panelHeight: '200',
+		valueField: 'id',
+		editable: false,
+		loadMsg: 'Please Wait..',
+		textField: 'nama_unit',
+		formatter: formatUnit,
+		fitColumns: true,
+		url: 'rekammedik/optionunit',
+		icons: [{
+			iconCls: 'icon-clear',
+			handler: function (e) {
+				$(e.data.target).combobox('clear').combobox('textbox').focus();
+			}
+		}],
+		onChange: function (value) {
+			if (value) {
+				$(this).combobox('getIcon', 0).css('visibility', 'visible')
+			} else {
+				$(this).combobox('getIcon', 0).css('visibility', 'hidden')
+			}
+		}
+	});
 
     $('#keluhan_utama').combobox({
         panelWidth:250,
@@ -419,6 +444,12 @@ $( document ).ready(function(){
     });
 
 })
+
+function formatUnit(row) {
+	var s = '<span style="font-weight:bold">' + row.nama_unit + '</span><br/>' +
+		'<span style="color:#888">' + row.alamat + '</span>';
+	return s;
+}
 
 function searchvalidate(v){
      $('#dgrekammedik').datagrid('reload',{  
@@ -656,25 +687,28 @@ function doSearch(value){
     var tgl2 = $('#key_tgldatang2').val();
     var validasi = $("input[name='key_validasi']:checked").val();
     var subgrupid = $('#key_subgrupid').val();
+    var unitid = $('#key_unitid').val();
     
     $('#dgrekammedik').datagrid('reload',{  
         search: value,
         tgl1 : tgl1,
         tgl2 : tgl2,
         validate : validasi,
-        subgrupid :subgrupid            
+        subgrupid :subgrupid,
+        unitid: unitid           
     });  
 }
 function clearSearch(){
 
     $('#search').searchbox('clear');
-    $('#fm-search').form('clear')
+    $('#fm-search').form('clear');
     
     $('#dgrekammedik').datagrid('reload',{  
         search: '',
         tgl1 : '',
         tgl2 : '',
-        validate : ''            
+        validate : '', 
+        unitid: ''           
     }); 
 }
 
@@ -781,10 +815,12 @@ function save(){
 }
 
 function edit(){
-    var grupid = document.getElementById("grupid").value;
+   // var grupid = document.getElementById("grupid").value;
+    var uid = document.getElementById("uid").value;
     var row = $('#dgrekammedik').datagrid('getSelected');
     if(row){
-        if(grupid!='4'){
+        // cek apakah data ini data unit yang login??
+        if(uid==row.unitid){
         $('#dlg').dialog('open').dialog('setTitle','Edit Rekam Medik');
         $('#fm').form('load',row);
         var dgPanel = $('#dghistory').datagrid('getPanel');
@@ -814,6 +850,8 @@ function edit(){
 
         $('#btnlink').linkbutton({text:'Update'});
         url = 'rekammedik/update/'+row.id;
+        }else{
+            $.messager.alert('Warning', 'Maaf! Anda tidak bisa edit data ini', 'warning');
         }
     }else{
     	$.messager.alert('Warning','Pilih data yang mau diedit','warning');
@@ -862,8 +900,10 @@ function validasirekam(){
 }
 
 function remove(){ 
+    var uid = document.getElementById("uid").value;
     var row = $('#dgrekammedik').datagrid('getSelected'); 
     if(row){
+        if (uid == row.unitid) {
         $.messager.confirm('Konfirmasi','Apakah anda yakin akan menghapus data rekam medik ini ?',function(r){ 
             if (r){ 
                 $.post('rekammedik/delete',
@@ -879,6 +919,9 @@ function remove(){
                 ,'json'); 
                     $('#dlg').dialog('close'); } 
         });
+    }else{
+        $.messager.alert('Warning', 'Maaf! Anda tidak bisa menghapus data ini', 'warning');
+    }
     }else{
         $.messager.alert('Warning','Pilih data yang mau dihapus','warning');
     }

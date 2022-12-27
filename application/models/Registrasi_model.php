@@ -154,6 +154,45 @@ class Registrasi_model extends CI_Model
         return $rows; //return nya json
     }
 
+    function getriwayat($id)
+    {
+        $this->db->where('registrasiid', $id);
+        $query = $this->db->get('registrasi_riwayat');
+        $i  = 0;
+        $rows   = '';
+        foreach ($query->result() as $row) {
+            $rows .= $row->keluarga . '(' . $row->jenis_kanker . ')' . ', ';
+            $i++;
+        }
+        return $rows; //return nya json
+    }
+
+    function gettatalaksana($tatalaksanaid)
+    {
+        $this->db->where_in('id', explode(",", $tatalaksanaid));
+        $query = $this->db->get('tatalaksana');
+        $i  = 0;
+        $rows   = '';
+        foreach ($query->result() as $row) {
+            $rows .= $row->tatalaksana . ', ';
+            $i++;
+        }
+        return $rows; //return nya json
+    }
+
+    function getstatusstaging($stagingid)
+    {
+        $this->db->where('id', $stagingid);
+        $query = $this->db->get('staging');
+        $i  = 0;
+        $rows   = '';
+        foreach ($query->result() as $row) {
+            $rows .= $row->staging;
+            $i++;
+        }
+        return $rows; //return nya json
+    }
+
     public function simpan($detail, $detail2)
     {
         $this->db->trans_begin();

@@ -114,18 +114,19 @@ class Tumortestis_model extends CI_Model
         // }else{
         //     $j=2;
         // }
-        $p1 = $this->input->post('lokasi1', true);
-        if ($p1 == '1') {
-            $p1 = '1';
-        } else {
-            $p1 = '0';
-        }
-        $n1 = $this->input->post('lokasi2', true);
-        if ($n1 == '1') {
-            $n1 = '1';
-        } else {
-            $n1 = '0';
-        }
+
+        // $p1 = $this->input->post('lokasi1', true);
+        // if ($p1 == '1') {
+        //     $p1 = '1';
+        // } else {
+        //     $p1 = '0';
+        // }
+        // $n1 = $this->input->post('lokasi2', true);
+        // if ($n1 == '1') {
+        //     $n1 = '1';
+        // } else {
+        //     $n1 = '0';
+        // }
 
         $data = array(
             'registrasiid' => $this->input->post('registrasiid', true),
@@ -135,8 +136,10 @@ class Tumortestis_model extends CI_Model
             'bln_keluhan' => $this->input->post('bln_keluhan', true),
             'hari_keluhan' => $this->input->post('hari_keluhan', true),
             'durasi_penyakit' => $this->input->post('durasi_penyakit', true),
-            'lokasi1' => $p1,
-            'lokasi2' => $n1,
+            'lokasi_tumor' => ltrim($this->input->get('optlokasi', true), ','),
+            'lokasi_tumor_lainnya' => $this->input->post('lokasi_tumor_lainnya', true),
+            // 'lokasi1' => $p1,
+            // 'lokasi2' => $n1,
             'suhu' => $this->input->post('suhu'),
             'pemeriksaan_fisik' => ltrim($this->input->get('fisik', true), ','),
             'pemeriksaan_fisik_lainnya' => $this->input->post('pemeriksaan_fisik_lainnya', true),
@@ -252,18 +255,18 @@ class Tumortestis_model extends CI_Model
 
     public function update($id, $detail1, $detail2)
     {
-        $p1 = $this->input->post('lokasi1', true);
-        if ($p1 == '1') {
-            $p1 = '1';
-        } else {
-            $p1 = '0';
-        }
-        $n1 = $this->input->post('lokasi2', true);
-        if ($n1 == '1') {
-            $n1 = '1';
-        } else {
-            $n1 = '0';
-        }
+        // $p1 = $this->input->post('lokasi1', true);
+        // if ($p1 == '1') {
+        //     $p1 = '1';
+        // } else {
+        //     $p1 = '0';
+        // }
+        // $n1 = $this->input->post('lokasi2', true);
+        // if ($n1 == '1') {
+        //     $n1 = '1';
+        // } else {
+        //     $n1 = '0';
+        // }
 
         $this->db->trans_begin();
 
@@ -274,8 +277,10 @@ class Tumortestis_model extends CI_Model
             'bln_keluhan' => $this->input->post('bln_keluhan', true),
             'hari_keluhan' => $this->input->post('hari_keluhan', true),
             'durasi_penyakit' => $this->input->post('durasi_penyakit', true),
-            'lokasi1' => $p1,
-            'lokasi2' => $n1,
+            'lokasi_tumor' => ltrim($this->input->get('optlokasi', true), ','),
+            'lokasi_tumor_lainnya' => $this->input->post('lokasi_tumor_lainnya', true),
+            // 'lokasi1' => $p1,
+            // 'lokasi2' => $n1,
             'suhu' => $this->input->post('suhu'),
             'pemeriksaan_fisik' => ltrim($this->input->get('fisik', true), ','),
             'pemeriksaan_fisik_lainnya' => $this->input->post('pemeriksaan_fisik_lainnya', true),

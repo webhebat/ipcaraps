@@ -85,7 +85,8 @@
                                         <td>Jenis Kelamin</td>
                                         <td>:</td>
                                         <td><input type="radio" name="jenis_kelamin" id="laki" value="l"><label for="laki">Laki-laki</label>
-                                            <input type="radio" name="jenis_kelamin" id="perempuan" value="p"><label for="perempuan">Perempuan</label></td>
+                                            <input type="radio" name="jenis_kelamin" id="perempuan" value="p"><label for="perempuan">Perempuan</label>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Alamat Tetap</td>
@@ -316,7 +317,8 @@
                                         <td>Riwayat Rujukan</td>
                                         <td>:</td>
                                         <td><input type="radio" name="riwayat_rujukan" id="r_y" value="y" onClick="sriwayat('y')"><label for="r_y">Ya</label>
-                                            <input type="radio" name="riwayat_rujukan" id="r_n" value="n" onClick="sriwayat('n')"><label for="r_n">Tidak</label></td>
+                                            <input type="radio" name="riwayat_rujukan" id="r_n" value="n" onClick="sriwayat('n')"><label for="r_n">Tidak</label>
+                                        </td>
                                     </tr>
                                     <tr id="trppk1" style="display: none">
                                         <td>PPK 1</td>
@@ -634,13 +636,15 @@
                     <td>Status Valadasi</td>
                     <td>:</td>
                     <td><input type="radio" name="key_validasi" id="sudah" value="y"><label for="sudah">Sudah divalidasi</label>
-                        <input type="radio" name="key_validasi" id="belum" value="n"><label for="belum">Belum divalidasi</label><input type="radio" name="key_validasi" id="semua" value=""><label for="semua">Semua</label></td>
+                        <input type="radio" name="key_validasi" id="belum" value="n"><label for="belum">Belum divalidasi</label><input type="radio" name="key_validasi" id="semua" value=""><label for="semua">Semua</label>
+                    </td>
                 </tr>
                 <tr>
                     <td>Luaran/follow up</td>
                     <td>:</td>
                     <td><input type="radio" name="key_luaran" id="luaran_y" value="y"><label for="luaran_y">Sudah</label>
-                        <input type="radio" name="key_luaran" id="luaran_n" value="n"><label for="luaran_n">Belum</label><input type="radio" name="key_luaran" id="luaran_u" value=""><label for="luaran_u">Semua</label></td>
+                        <input type="radio" name="key_luaran" id="luaran_n" value="n"><label for="luaran_n">Belum</label><input type="radio" name="key_luaran" id="luaran_u" value=""><label for="luaran_u">Semua</label>
+                    </td>
                 </tr>
                 <tr>
                     <td>Status follow up</td>

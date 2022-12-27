@@ -170,10 +170,16 @@
                             <td valign="top">
                                 <table>
                                     <tr>
-                                        <td>Lokasi</td>
+                                        <td>Lokasi Tumor</td>
                                         <td>:</td>
-                                        <td><input type="checkbox" name="lokasi1" id="lokasi1" value="1"><label for="lokasi1">Ovarium dextra</label><input type="checkbox" name="lokasi2" id="lokasi2" value="1"><label for="lokasi2">Ovarium sinistra</label></td>
+                                        <td><input name="lokasi_tumor" id="lokasi_tumor" class="easyui-textbox" style="width:200px"></td>
                                     </tr>
+                                    <tr>
+                                        <td>Lokasi Tumor Lainnya</td>
+                                        <td>:</td>
+                                        <td><input name="lokasi_tumor_lainnya" id="lokasi_tumor_lainnya" class="easyui-textbox" style="width:250px"></td>
+                                    </tr>
+
                                     <tr>
                                         <td>Suhu</td>
                                         <td>:</td>

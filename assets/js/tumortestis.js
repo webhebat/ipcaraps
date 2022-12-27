@@ -70,7 +70,7 @@ $(document).ready(function () {
 		nowrap: false,
 		idField: "id",
 		url: "tumortestis/read",
-		title: "Data Register Spesifik tumortestis",
+		title: "Data Register Spesifik Germ Cell",
 		onDblClickRow: function () {
 			edit();
 		},
@@ -1099,6 +1099,48 @@ $(document).ready(function () {
 	});
 
 	$("#jenis_pemeriksaan").combobox({
+		panelWidth: 250,
+		panelHeight: "auto",
+		valueField: "id",
+		loadMsg: "Please Wait..",
+		textField: "nama_options",
+		fitColumns: true,
+		multiple: true,
+		multiline: true,
+		editable: false,
+		//url:'tumortestis/pemeriksaanfisik',
+		formatter: function (row) {
+			var opts = $(this).combobox("options");
+			return (
+				'<input type="checkbox" id="ck" name="ck" class="combobox-checkbox">' +
+				row[opts.textField]
+			);
+		},
+		onSelect: function (row) {
+			//console.log(row)
+			var opts = $(this).combobox("options");
+			var el = opts.finder.getEl(this, row[opts.valueField]);
+			el.find("input.combobox-checkbox")._propAttr("checked", true);
+			showother4(row[opts.textField], true);
+		},
+		onUnselect: function (row) {
+			var opts = $(this).combobox("options");
+			var el = opts.finder.getEl(this, row[opts.valueField]);
+			el.find("input.combobox-checkbox")._propAttr("checked", false);
+			showother4(row[opts.textField], false);
+		},
+		onLoadSuccess: function () {
+			var opts = $(this).combobox("options");
+			var target = this;
+			var values = $(target).combobox("getValues");
+			$.map(values, function (value) {
+				var el = opts.finder.getEl(target, value);
+				el.find("input.combobox-checkbox")._propAttr("checked", true);
+			});
+		}
+	});
+
+	$("#lokasi_tumor").combobox({
 		panelWidth: 250,
 		panelHeight: "auto",
 		valueField: "id",
@@ -2799,6 +2841,7 @@ function save() {
 	if (idnhep) {
 		var fisik = $("#pemeriksaan_fisik").combobox("getValues");
 		var optjenis = $("#jenis_pemeriksaan").combobox("getValues");
+		var optlokasi = $("#lokasi_tumor").combobox("getValues");
 		var optxray = $("#opt_xray").combobox("getValues");
 		var opthistopatologi = $("#opt_histopatologi").combobox("getValues");
 		var optstaging = $("#figo2018").combobox("getValues");
@@ -2825,6 +2868,8 @@ function save() {
 				fisik +
 				"&optjenis=" +
 				optjenis +
+				"&optlokasi=" +
+				optlokasi +
 				"&optxray=" +
 				optxray +
 				"&opthistopatologi=" +
@@ -3045,6 +3090,9 @@ function tambahspesifik() {
 	var urljperiksa = "tumortestis/dataoptions?type=jperiksa";
 	$("#jenis_pemeriksaan").combobox("reload", urljperiksa);
 
+	var urllokasitumor = "tumortestis/dataoptions?type=lokasitumor";
+	$("#lokasi_tumor").combobox("reload", urllokasitumor);
+
 	var urlhxray = "tumortestis/dataoptions?type=xray";
 	$("#opt_xray").combobox("reload", urlhxray);
 
@@ -3086,7 +3134,7 @@ function edit() {
 	if (row) {
 		$("#dlg")
 			.dialog("open")
-			.dialog("setTitle", "Edit Register Spesifik Tumortestis");
+			.dialog("setTitle", "Edit Register Spesifik Germ Cell");
 		$("#fm").form("load", row);
 
 		if (row.lokasi1 == "1") {
@@ -3133,7 +3181,9 @@ function edit() {
 		var urlradioterapi = "tumortestis/dataoptions?type=lokasi radioterapi";
 		$("#lokasi_radioterapi").combobox("reload", urlradioterapi);
 		var urljperiksa = "tumortestis/dataoptions?type=jperiksa";
-		$("#jenis_pemeriksaan").combobox("reload", urljperiksa);		
+		$("#jenis_pemeriksaan").combobox("reload", urljperiksa);
+		var urllokasitumor = "tumortestis/dataoptions?type=lokasitumor";
+		$("#lokasi_tumor").combobox("reload", urllokasitumor);		
 		var urlhxray = "tumortestis/dataoptions?type=xray";
 	    $("#opt_xray").combobox("reload", urlhxray);
 

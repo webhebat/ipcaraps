@@ -45,7 +45,7 @@ class Registrasi extends CI_Controller
         $offset = ($offset - 1) * $limit;
         //$id = $this->uri->segment(3);
         //$search2 = $this->uri->segment(4);
-        $data   = $this->registrasi_model->get_registrasi($offset, $limit, $search, $validasi, $unitid, $tgl, $tgl2, $luaran, $status, $subgrupid,$tgldiagnosis,$tgldiagnosis2);
+        $data   = $this->registrasi_model->get_registrasi($offset, $limit, $search, $validasi, $unitid, $tgl, $tgl2, $luaran, $status, $subgrupid, $tgldiagnosis, $tgldiagnosis2);
         $i  = 0;
         $rows   = array();
         foreach ($data['data'] as $r) {
@@ -531,7 +531,7 @@ class Registrasi extends CI_Controller
         //$offset = ($offset-1)*$limit;
         //$id = $this->uri->segment(3);
         //$search2 = $this->uri->segment(4);
-        $data   = $this->registrasi_model->get_registrasi($offset, $limit, $search, $validasi, $unitid, $tgl, $tgl2, $luaran, $status, $subgrupid,$tgldiagnosis, $tgldiagnosis2 );
+        $data   = $this->registrasi_model->get_registrasi($offset, $limit, $search, $validasi, $unitid, $tgl, $tgl2, $luaran, $status, $subgrupid, $tgldiagnosis, $tgldiagnosis2);
 
         //load our new PHPExcel library
         $this->load->library('excel');
@@ -546,7 +546,7 @@ class Registrasi extends CI_Controller
                                       ->setCellValue('B2', 'Unit')
                                       ->setCellValue('C2', 'Outlet');*/
 
-        $heading = array('No Regisrasi', 'Nama Lengkap', 'NIK', 'Tempat,Tgl Lahir', 'JKelamin', 'Usia Terdiagnosis', 'Alamat', 'Propinsi', 'Kabupaten', 'Kecamatan', 'Desa', 'No Rekam Medis', 'No HP', 'No HP 2', 'No BPJS', 'BB', 'TB', 'Kesimpulan', 'Subgrup', 'Morfologi', 'Topografi', 'Literalitas', 'Rujukan', 'PPK1', 'Tgl PPK1', 'PPK2', 'Tgl PPK2', 'PPK3', 'Tgl PPK3', 'Tgl Pertama Konsultasi', 'Dasar Diagnosis', 'Umunisasi', 'ASI Eksklusif');
+        $heading = array('No Regisrasi', 'Nama Lengkap', 'NIK', 'Tempat,Tgl Lahir', 'JKelamin', 'Usia Terdiagnosis', 'Alamat', 'Propinsi', 'Kabupaten', 'Kecamatan', 'Desa', 'No Rekam Medis', 'No HP', 'No HP 2', 'No BPJS', 'BB', 'TB', 'Kesimpulan', 'Subgrup', 'Morfologi', 'Topografi', 'Literalitas', 'Rujukan', 'PPK1', 'Tgl PPK1', 'PPK2', 'Tgl PPK2', 'PPK3', 'Tgl PPK3', 'Tgl Pertama Konsultasi', 'Dasar Diagnosis', 'Umunisasi', 'ASI Eksklusif', 'Riwayat Keluarga', 'Tata Laksana', 'Staging/Stadium');
         //Loop Heading
         $rowNumberH = 2;
         $colH = 'A';
@@ -596,7 +596,10 @@ class Registrasi extends CI_Controller
                 ->setCellValue('AD' . $i, $r->tgl_konsultasi)
                 ->setCellValue('AE' . $i, $this->registrasi_model->getnamadiagnosis($r->id))
                 ->setCellValue('AF' . $i, $imunisasi)
-                ->setCellValue('AG' . $i, $asi);
+                ->setCellValue('AG' . $i, $asi)
+                ->setCellValue('AH' . $i, $this->registrasi_model->getriwayat($r->id))
+                ->setCellValue('AI' . $i, $this->registrasi_model->gettatalaksana($r->tatalaksanaid))
+                ->setCellValue('AJ' . $i, $this->registrasi_model->getstatusstaging($r->stagingid));
             //$rows[$i]->siswa_waktu = $this->getjatuhtempo($r->tgl_jatuh_tempo,$tgl);
             //$rows[$i]->warning = $this->warning($r->tgl_jatuh_tempo,$tgl);
             $i++;
