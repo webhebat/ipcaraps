@@ -546,7 +546,7 @@ class Registrasi extends CI_Controller
                                       ->setCellValue('B2', 'Unit')
                                       ->setCellValue('C2', 'Outlet');*/
 
-        $heading = array('No Regisrasi', 'Nama Lengkap', 'NIK', 'Tempat,Tgl Lahir', 'JKelamin', 'Usia Terdiagnosis', 'Alamat', 'Propinsi', 'Kabupaten', 'Kecamatan', 'Desa', 'No Rekam Medis', 'No HP', 'No HP 2', 'No BPJS', 'BB', 'TB', 'Kesimpulan', 'Subgrup', 'Morfologi', 'Topografi', 'Literalitas', 'Rujukan', 'PPK1', 'Tgl PPK1', 'PPK2', 'Tgl PPK2', 'PPK3', 'Tgl PPK3', 'Tgl Pertama Konsultasi', 'Dasar Diagnosis', 'Umunisasi', 'ASI Eksklusif', 'Riwayat Keluarga', 'Tata Laksana', 'Staging/Stadium');
+        $heading = array('No Regisrasi', 'Nama Lengkap', 'NIK', 'Tempat,Tgl Lahir', 'JKelamin', 'Usia Terdiagnosis', 'Alamat', 'Propinsi', 'Kabupaten', 'Kecamatan', 'Desa', 'No Rekam Medis', 'No HP', 'No HP 2', 'No BPJS', 'BB', 'TB', 'Kesimpulan', 'Subgrup', 'Morfologi', 'Topografi', 'Literalitas', 'Rujukan', 'PPK1', 'Tgl PPK1', 'PPK2', 'Tgl PPK2', 'PPK3', 'Tgl PPK3', 'Tgl Pertama Konsultasi', 'Dasar Diagnosis', 'Berat Lahir', 'Umunisasi', 'ASI Eksklusif', 'Riwayat Keluarga', 'Tata Laksana', 'Staging/Stadium');
         //Loop Heading
         $rowNumberH = 2;
         $colH = 'A';
@@ -561,6 +561,7 @@ class Registrasi extends CI_Controller
         foreach ($data['data'] as $r) {
             //array keys ini = attribute 'field' di view nya
             //$rows[$i] = $r;
+            $beratlahir = $r->berat_lahir;
             $imunisasi = ($r->imunisasi == 'imunisasi_t') ? "tidak" : (($r->imunisasi == 'imunisasi_y') ? "ya" : "-");
             $asi = (($r->asi == 'asi_t') ? "tidak" : ($r->asi == 'asi_d')) ? "dalam masa asi" : (($r->asi == 'asi_y') ? "ya" : "-");
             //echo $bar; // display 2 instead of 1
@@ -595,11 +596,12 @@ class Registrasi extends CI_Controller
                 ->setCellValue('AC' . $i, $r->tgl_ppk3)
                 ->setCellValue('AD' . $i, $r->tgl_konsultasi)
                 ->setCellValue('AE' . $i, $this->registrasi_model->getnamadiagnosis($r->id))
-                ->setCellValue('AF' . $i, $imunisasi)
-                ->setCellValue('AG' . $i, $asi)
-                ->setCellValue('AH' . $i, $this->registrasi_model->getriwayat($r->id))
-                ->setCellValue('AI' . $i, $this->registrasi_model->gettatalaksana($r->tatalaksanaid))
-                ->setCellValue('AJ' . $i, $this->registrasi_model->getstatusstaging($r->stagingid));
+                ->setCellValue('AF' . $i, $beratlahir)
+                ->setCellValue('AG' . $i, $imunisasi)
+                ->setCellValue('AH' . $i, $asi)
+                ->setCellValue('AI' . $i, $this->registrasi_model->getriwayat($r->id))
+                ->setCellValue('AJ' . $i, $this->registrasi_model->gettatalaksana($r->tatalaksanaid))
+                ->setCellValue('AK' . $i, $this->registrasi_model->getstatusstaging($r->stagingid));
             //$rows[$i]->siswa_waktu = $this->getjatuhtempo($r->tgl_jatuh_tempo,$tgl);
             //$rows[$i]->warning = $this->warning($r->tgl_jatuh_tempo,$tgl);
             $i++;
