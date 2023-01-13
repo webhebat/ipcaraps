@@ -196,6 +196,7 @@
                                         <td>
                                             <input type="radio" name="transilu" id="transilu1" value="y"><label for="transilu1">Positif</label>
                                             <input type="radio" name="transilu" id="transilu2" value="n"><label for="transilu2">Negatif</label>
+                                            <input type="radio" name="transilu" id="transilu3" value="u"><label for="transilu3">Belum Diketahui</label>
                                         </td>
                                     </tr>
                                     <tr id="trlimpa" style="display: none">

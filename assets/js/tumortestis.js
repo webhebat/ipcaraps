@@ -2926,6 +2926,7 @@ function tambahspesifik() {
 	document.getElementById("kgb1_mri").checked = true;
 	document.getElementById("xray1").checked = true;
 	document.getElementById("abnormalitas1_ctscan").checked = true;
+	document.getElementById("transilu3").checked = true;
 
 	hidedefault();
 
